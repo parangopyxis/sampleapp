@@ -12,8 +12,8 @@ pipeline {
             ansiblePlaybook(playbook: 'infrastructure/ansible/playbooks/provision_server.yml', colorized: true, inventory: 'infrastructure/ansible/playbooks/hosts/local_inventory')
             
           },
-          "": {
-            sh 'git pull --force'
+          "error": {
+            sh 'git pull origin master'
             
           }
         )
