@@ -3,16 +3,7 @@ pipeline {
   stages {
     stage('Welcome') {
       steps {
-        parallel(
-          "Welcome": {
-            echo 'Welcome to DevOps Training'
-            
-          },
-          "Pull changes": {
-            sh 'git pull origin master'
-            
-          }
-        )
+        echo 'Welcome to DevOps Training'
       }
     }
     stage('Prepare local environment') {
