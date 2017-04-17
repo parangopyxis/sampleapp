@@ -13,8 +13,8 @@ pipeline {
             sh 'mvn test'
             
           },
-          "": {
-            junit 'surefire-reports/*.xml'
+          "error": {
+            junit 'target/surefire-reports/*.xml'
             
           }
         )
