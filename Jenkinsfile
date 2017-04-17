@@ -8,16 +8,12 @@ pipeline {
     }
     stage('Test') {
       steps {
-        parallel(
-          "Test": {
-            sh 'mvn test'
-            
-          },
-          "error": {
-            junit 'target/surefire-reports/*.xml'
-            
-          }
-        )
+        sh 'mvn test'
+      }
+    }
+    stage('Publish Test Results') {
+      steps {
+        junit 'target/surefire-reports/*.xml'
       }
     }
   }
