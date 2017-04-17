@@ -8,35 +8,26 @@ pipeline {
             echo 'Welcome to DevOps Training'
             
           },
-          "Prepare local environment": {
-            ansiblePlaybook(playbook: 'infrastructure/ansible/playbooks/provision_server.yml', colorized: true, inventory: 'infrastructure/ansible/playbooks/hosts/local_inventory')
-            
-          },
-          "error": {
+          "Pull changes": {
             sh 'git pull origin master'
             
           }
         )
       }
     }
-    stage('Test') {
+    stage('Prepare local environment') {
+      steps {
+        ansiblePlaybook(playbook: 'infrastructure/ansible/playbooks/provision_server.yml', colorized: true, inventory: 'infrastructure/ansible/playbooks/hosts/local_inventory')
+      }
+    }
+    stage('Run Tests') {
       steps {
         sh 'mvn test'
       }
     }
     stage('Publish Test Results') {
       steps {
-        parallel(
-          "Publish Test Results": {
-            junit 'target/surefire-reports/*.xml'
-            
-          },
-          "Prepare Infrastructure Plan": {
-            sh '''cd infrastructure/terraform/
-terraform plan'''
-            
-          }
-        )
+        junit 'target/surefire-reports/*.xml'
       }
     }
   }
