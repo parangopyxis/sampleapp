@@ -13,7 +13,17 @@ pipeline {
     }
     stage('Publish Test Results') {
       steps {
-        junit 'target/surefire-reports/*.xml'
+        parallel(
+          "Publish Test Results": {
+            junit 'target/surefire-reports/*.xml'
+            
+          },
+          "Prepare Infrastructure Plan": {
+            sh '''cd infrastructure/terraform/
+terraform plan'''
+            
+          }
+        )
       }
     }
   }
