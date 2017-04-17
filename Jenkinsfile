@@ -3,7 +3,16 @@ pipeline {
   stages {
     stage('Welcome') {
       steps {
-        echo 'Welcome to DevOps Training'
+        parallel(
+          "Welcome": {
+            echo 'Welcome to DevOps Training'
+            
+          },
+          "Prepare local environment": {
+            ansiblePlaybook(playbook: 'infrastructure/ansible/playbooks/provision_server.yml', colorized: true, inventory: 'infrastructure/ansible/playbooks/hosts/local_inventory')
+            
+          }
+        )
       }
     }
     stage('Test') {
