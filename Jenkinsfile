@@ -9,7 +9,7 @@ pipeline {
     stage('Prepare local environment') {
       steps {
         dir(path: './infrastructure/ansible/playbooks') {
-          ansiblePlaybook(playbook: 'provision_server.yml', colorized: true, inventory: 'hosts/local_inventory', installation: 'ansible-latest', sudo: true)
+          ansiblePlaybook(playbook: 'provision_server.yml', colorized: true, inventory: 'hosts/local_inventory', installation: 'ansible-latest', sudo: true, sudoUser: 'jenkins')
         }
         
       }
