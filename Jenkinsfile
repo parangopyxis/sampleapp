@@ -6,14 +6,6 @@ pipeline {
         echo 'Welcome to DevOps Training'
       }
     }
-    stage('Prepare local environment') {
-      steps {
-        dir(path: './infrastructure/ansible/playbooks') {
-          ansiblePlaybook(playbook: 'provision_server.yml', colorized: true, inventory: 'hosts/local_inventory', installation: 'ansible-latest')
-        }
-        
-      }
-    }
     stage('Run Tests') {
       steps {
         sh 'mvn test'
@@ -22,6 +14,14 @@ pipeline {
     stage('Publish Test Results') {
       steps {
         junit 'target/surefire-reports/*.xml'
+      }
+    }
+    stage('Create Infrastructure') {
+      steps {
+        dir(path: './infrastructure/terraform/') {
+          sh 'terraform plan'
+        }
+        
       }
     }
   }
