@@ -1,9 +1,9 @@
 variable "aws_access_key" {
-	default = AKIAIN3SNTS2XMIERR6Q
+	default = "AKIAIN3SNTS2XMIERR6Q"
 }
 
 variable "aws_secret_key" {
-	default = Ai187ESzFXPxWbMw/6hIhKyXbDbcoVqHZ06B/twg
+	default = "Ai187ESzFXPxWbMw/6hIhKyXbDbcoVqHZ06B/twg"
 }
 
 variable "aws_region" {
