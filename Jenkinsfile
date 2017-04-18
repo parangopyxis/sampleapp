@@ -40,17 +40,5 @@ terraform output EC2_2.ip >> ../ansible/playbooks/hosts/qa_inventory'''
         
       }
     }
-    stage('') {
-      steps {
-        catchError() {
-          dir(path: './infrastructure/terraform/') {
-            sh 'terraform destroy -force'
-          }
-          
-          error 'an error occurred, infrastructure was distroyed'
-        }
-        
-      }
-    }
   }
 }
