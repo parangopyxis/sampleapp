@@ -19,7 +19,8 @@ pipeline {
     stage('[Terraform] deploy Infrastructure') {
       steps {
         dir(path: './infrastructure/terraform/') {
-          sh 'terraform plan'
+          sh '''terraform destroy
+terraform plan'''
           sh 'terraform apply'
         }
         
