@@ -8,7 +8,7 @@ pipeline {
     }
     stage('Prepare local environment') {
       steps {
-        ansiblePlaybook(playbook: './infrastructure/ansible/playbooks/provision_server.yml', colorized: true, inventory: './ infrastructure/ansible/playbooks/hosts/local_inventory', sudo: true)
+        sh 'ansible-playbook -i ./infrastructure/ansible/playbooks/hosts/local_inventory ./infrastructure/ansible/playbooks/provision_server.yml -s -U root'
       }
     }
     stage('Run Tests') {
