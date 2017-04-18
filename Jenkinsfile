@@ -16,12 +16,10 @@ pipeline {
         junit 'target/surefire-reports/*.xml'
       }
     }
-    stage('[Terraform] deploy Infrastructure') {
+    stage('[Ansible] deploy Infrastructure') {
       steps {
-        dir(path: './infrastructure/terraform/') {
-          sh '''terraform destroy -force
-terraform plan'''
-          sh 'terraform apply'
+        dir(path: './infrastructure/ansible/') {
+          ansiblePlaybook(playbook: 'provision_infrastructure.yml', colorized: true, installation: 'ansible-latest')
         }
         
       }
