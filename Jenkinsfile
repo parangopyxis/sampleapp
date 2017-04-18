@@ -8,7 +8,8 @@ pipeline {
     }
     stage('Prepare local environment') {
       steps {
-        sh 'ansible-playbook -i ./infrastructure/ansible/playbooks/hosts/local_inventory ./infrastructure/ansible/playbooks/provision_server.yml -s -U root'
+        sh '''chmod -x ./infrastructure/ansible/playbooks/hosts/local_inventory
+ansible-playbook -i ./infrastructure/ansible/playbooks/hosts/local_inventory ./infrastructure/ansible/playbooks/provision_server.yml -s -U root'''
       }
     }
     stage('Run Tests') {
