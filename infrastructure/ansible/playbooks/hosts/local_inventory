@@ -1,2 +1,2 @@
 [workshop_servers]
-localhost ansible_connection=local ansible_user=jenkins
+localhost ansible_connection=local
