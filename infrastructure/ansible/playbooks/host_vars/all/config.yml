@@ -1,2 +1,0 @@
-ec2_aws_access_key: "{{ vault_ec2_aws_access_key }}"
-ec2_aws_secret_key: "{{ vault_ec2_aws_secret_key }}"
