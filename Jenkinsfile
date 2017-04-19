@@ -13,7 +13,16 @@ pipeline {
     }
     stage('Publish Test Results') {
       steps {
-        junit 'target/surefire-reports/*.xml'
+        parallel(
+          "Publish Test Results": {
+            junit 'target/surefire-reports/*.xml'
+            
+          },
+          "reset env hosts": {
+            sh 'echo \'[workshop_servers]\' > hosts/qa_inventory'
+            
+          }
+        )
       }
     }
     stage('[Ansible] Provision Infrastructure') {
