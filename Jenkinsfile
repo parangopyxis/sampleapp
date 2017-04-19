@@ -19,7 +19,10 @@ pipeline {
             
           },
           "reset env hosts": {
-            sh 'echo \'[workshop_servers]\' > hosts/qa_inventory'
+            dir(path: './infrastructure/ansible/playbooks') {
+              sh 'echo \'[workshop_servers]\' > hosts/qa_inventory'
+            }
+            
             
           }
         )
