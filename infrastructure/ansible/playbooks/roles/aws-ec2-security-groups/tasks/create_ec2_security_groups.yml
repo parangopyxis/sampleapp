@@ -8,7 +8,5 @@
     state: "{{ item.ec2_state }}"
     validate_certs: "{{ item.ec2_validate_certs }}"
     vpc_id: "{{ item.ec2_vpc_id }}"
-    purge_rules: yes
-    purge_rules_egress: yes
   with_items:
     - "{{ ec2_security_groups }}"
