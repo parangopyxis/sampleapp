@@ -13,13 +13,25 @@ pipeline {
     }
     stage('Publish Test Results') {
       steps {
-        junit 'target/surefire-reports/*.xml'
+        parallel(
+          "Publish Test Results": {
+            junit 'target/surefire-reports/*.xml'
+            
+          },
+          "reset env hosts": {
+            dir(path: './infrastructure/ansible/playbooks') {
+              sh 'echo \'[workshop_servers]\' > hosts/qa_inventory'
+            }
+            
+            
+          }
+        )
       }
     }
     stage('[Ansible] Provision Infrastructure') {
       steps {
         dir(path: './infrastructure/ansible/playbooks') {
-          ansiblePlaybook(playbook: 'provision_infrastructure.yml', installation: 'ansible-latest', extras: '-e env=qa -vvv')
+          ansiblePlaybook(playbook: 'provision_infrastructure.yml', extras: '-e env=qa -vvv')
         }
         
       }
