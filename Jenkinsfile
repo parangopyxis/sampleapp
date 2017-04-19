@@ -37,4 +37,8 @@ pipeline {
       }
     }
   }
+  environment {
+    AWS_ACCES_KEY_ID = 'AKIAIN3SNTS2XMIERR6Q'
+    AWS_SECRET_ACCESS_KEY = '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'
+  }
 }
