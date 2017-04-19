@@ -31,14 +31,13 @@ pipeline {
     stage('[Ansible] Provision Infrastructure') {
       steps {
         dir(path: './infrastructure/ansible/playbooks') {
-          ansiblePlaybook(playbook: 'provision_infrastructure.yml', installation: 'ansible-latest', extras: '-e env=qa -vvv')
+          sh '''export AWS_ACCESS_KEY_ID="AKIAIN3SNTS2XMIERR6Q"
+export AWS_SECRET_ACCESS_KEY="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"
+'''
+          ansiblePlaybook(playbook: 'provision_infrastructure.yml', extras: '-e env=qa', installation: 'ansible-latest')
         }
         
       }
     }
-  }
-  environment {
-    AWS_ACCES_KEY_ID = 'AKIAIN3SNTS2XMIERR6Q'
-    AWS_SECRET_ACCESS_KEY = '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'
   }
 }
