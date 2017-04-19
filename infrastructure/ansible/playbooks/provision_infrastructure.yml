@@ -8,6 +8,8 @@
   tasks:
     - name: Reset {{ env }}_inventory hosts file
       shell: echo "[workshop_servers]" > hosts/{{ env }}_inventory
+      args:
+        executable: /bin/bash
     - include_role:
         name: aws-networking
     - include_vars: vars/vpc_role_vars
