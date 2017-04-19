@@ -1,0 +1,24 @@
+- include_vars: vars/vpc_role_vars
+
+- name: Create subnets
+  ec2_vpc_subnet:
+    cidr: "{{ item.1.cidr }}"
+    region: "{{ aws_region }}"
+    vpc_id: "{{ role_vpc_id }}"
+    tags:
+      Name: "{{ item.1.name }}-{{ item.0 }}"
+  with_indexed_items: "{{ vpc_subnets }}"
+  register: created_subnets
+
+- debug: var=created_subnets
+
+- name: Register Subnets IDs into vars/vpc_role_vars
+  lineinfile:
+    dest: vars/vpc_role_vars
+    line: "subnet_{{ item.0 }}_id: {{ item.1.subnet.id }}"
+    regexp: "^subnet_{{ item.0 }}_id:*"
+  with_indexed_items: "{{ created_subnets.results }}"
+
+- name: Register Subnets IDs as facts
+  set_fact:
+    role_subnets: "{{ created_subnets }}"

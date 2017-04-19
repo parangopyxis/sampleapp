@@ -1,0 +1,24 @@
+ec2_aws_access_key: XXXXXXXXXXXX
+ec2_aws_secret_key: YYYYYYYYYYYY
+ec2_security_groups:
+  - ec2_sg_name: My_Sec_Group
+    ec2_description: My security Group Description
+    ec2_region: us-east-1
+    ec2_state: present
+    ec2_validate_certs: yes
+    ec2_vpc_id: vpc-xxxxxxx
+ec2_security_groups_rules:
+  - ec2_sg_name: My_Sec_Group
+    ec2_description: My security Group Description
+    ec2_sg_ingress_rules:
+      - proto: tcp
+        from_port: 22
+        to_port: 22
+        cidr_ip: 0.0.0.0/0
+        #group_id: ""
+    ec2_sg_egress_rules:
+      - proto: all
+        from_port: ""
+        to_port: ""
+        cidr_ip: 0.0.0.0/0
+        #group_name: ""

@@ -1,0 +1,51 @@
+aws_region: sa-east-1
+vpc_name: vp_workshop_vpc # VPC Name. Will be stored as the aws tag Name
+vpc_cidr_block: 10.10.0.0/16
+vpc_subnets: # List of dictionaries containing cidr and the tag Name to be assigned to each subnet
+  - { cidr: 10.10.1.0/24 , name: subnet-1 }
+enable_eips: no # Whether to enable Elastic IPs creation or not
+############### IF enable_eips=yes ###############
+##################################################
+enable_nat_gateway: no # Whether to enable Nat gateway creation or not
+########## IF enable_nat_gateway=yes #############
+#allocation_id: ai-00000
+#client_token:  # Optional unique token to be used during create to ensure idempotency. When specifying this option, ensure you specify the eip_address parameter as well otherwise any subsequent runs will fail.
+#natgw_eip_address: 1.1.1.1
+######################## aws-ec2-security-groups roles vars ##########################
+ec2_aws_access_key: "{{ lookup( 'env' , 'AWS_ACCESS_KEY_ID') }}"
+ec2_aws_secret_key: "{{ lookup( 'env' , 'AWS_SECRET_ACCESS_KEY') }}"
+ec2_security_groups:
+  - ec2_sg_name: vp_workshop_sg_{{ env }}
+    ec2_description: Security Group for Velocity DevOps Workshop
+    ec2_region: "{{ aws_region }}"
+    ec2_state: present
+    ec2_validate_certs: yes
+    ec2_vpc_id: "{{ role_vpc_id }}"
+ec2_security_groups_rules:
+  - ec2_sg_name: vp_workshop_sg_{{ env }}
+    ec2_description: Security Group for Velocity DevOps Workshop
+    ec2_sg_ingress_rules:
+      - proto: tcp
+        from_port: 22
+        to_port: 22
+        cidr_ip: 0.0.0.0/0
+    ec2_sg_egress_rules:
+      - proto: all
+        cidr_ip: 0.0.0.0/0
+######################### ec2-instances role vars #######################
+ec2_assign_public_ip: yes
+#ec2_aws_access_key: XXXXXXXXXXXXXXXXXXXX
+#ec2_aws_secret_key: YYYYYYYYYYYYYYYYYYYY
+ec2_instance_tags:
+  Name: vp_workshop_{{ env }}
+ec2_count_tag:
+  Name: vp_workshop_{{ env }}
+ec2_ebs_optimized: no
+ec2_exact_count: 1
+ec2_group: vp_workshop_sg_{{ env }}
+ec2_image: ami-a97013c5
+ec2_instance_type: t2.micro
+ec2_key_name: vp_workshop_key
+ec2_vpc_subnet_id: "{{ subnet_0_id }}"
+ec2_wait: yes
+ec2_wait_timeout: 1200

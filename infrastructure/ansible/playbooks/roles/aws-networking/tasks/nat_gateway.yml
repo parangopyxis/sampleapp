@@ -1,0 +1,11 @@
+- include_vars: vars/vpc_role_vars
+
+- name: Create VPC Nat Gateway
+  ec2_vpc_nat_gateway:
+    region: "{{ aws_region }}"
+    state: present
+    eip_address: "{{ natgw_eip_address }}"
+    release_eip: false
+    subnet_id: "{{ subnet_0_id }}"
+    wait: yes
+    wait_timeout: 1200

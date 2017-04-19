@@ -1,0 +1,17 @@
+- name: Create EC2 instance
+  ec2:
+    assign_public_ip: "{{ ec2_assign_public_ip }}"
+    aws_access_key: "{{ ec2_aws_access_key }}"
+    aws_secret_key: "{{ ec2_aws_secret_key }}"
+    count_tag: "{{ ec2_count_tag }}"
+    ebs_optimized: "{{ ec2_ebs_optimized }}"
+    exact_count: "{{ ec2_exact_count }}"
+    group: "{{ ec2_group }}"
+    image: "{{ ec2_image }}"
+    instance_type: "{{ ec2_instance_type }}"
+    key_name: "{{ ec2_key_name }}"
+    vpc_subnet_id: "{{ ec2_vpc_subnet_id }}"
+    wait: "{{ ec2_wait }}"
+    wait_timeout: "{{ ec2_wait_timeout }}"
+    instance_tags: "{{ ec2_instance_tags }}"
+  register: ec2_created_instances

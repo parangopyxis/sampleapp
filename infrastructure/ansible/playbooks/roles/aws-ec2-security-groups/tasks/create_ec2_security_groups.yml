@@ -1,0 +1,14 @@
+- name: Create EC2 Security Groups
+  ec2_group:
+    aws_access_key: "{{ ec2_aws_access_key }}"
+    aws_secret_key: "{{ ec2_aws_secret_key }}"
+    name: "{{ item.ec2_sg_name }}"
+    description: "{{ item.ec2_description }}"
+    region: "{{ item.ec2_region }}"
+    state: "{{ item.ec2_state }}"
+    validate_certs: "{{ item.ec2_validate_certs }}"
+    vpc_id: "{{ item.ec2_vpc_id }}"
+    purge_rules: yes
+    purge_rules_egress: yes
+  with_items:
+    - "{{ ec2_security_groups }}"

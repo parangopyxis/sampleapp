@@ -1,0 +1,13 @@
+- include: vpc.yml
+
+- include: subnets.yml
+
+- include: internet_gateway.yml
+
+- include: route_table.yml
+
+- include: elastic_ips.yml
+  when: enable_eips
+
+- include: nat_gateway.yml
+  when: enable_nat_gateway

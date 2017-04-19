@@ -1,0 +1,16 @@
+---
+vpc_name: My_VPC_Ansible # VPC Name. Will be stored as the aws tag Name
+vpc_cidr_block: 10.10.0.0/16
+vpc_subnets: # List of dictionaries containing cidr and the tag Name to be assigned to each subnet
+  - { cidr: 10.10.1.0/24 , name: subnet-1 }
+  - { cidr: 10.10.2.0/24 , name: subnet-2 }
+enable_eips: no # Whether to enable Elastic IPs creation or not
+############### IF enable_eips=yes ###############
+##################################################
+enable_nat_gateway: no # Whether to enable Nat gateway creation or not
+########## IF enable_nat_gateway=yes #############
+allocation_id: ai-00000
+client_token:  # Optional unique token to be used during create to ensure idempotency. When specifying this option, ensure you specify the eip_address parameter as well otherwise any subsequent runs will fail.
+natgw_eip_address: 1.1.1.1
+aws_region: us-west-1
+##################################################

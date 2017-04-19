@@ -1,0 +1,10 @@
+- name: Create Route Table for Internet Facing subnet
+  ec2_vpc_route_table :
+    region: "{{ aws_region }}"
+    vpc_id: "{{ role_vpc_id }}"
+    routes:
+      - dest: 0.0.0.0/0
+        gateway_id: "{{ role_internet_gateway_id }}"
+    subnets: "{{ item.1.subnet.id }}"
+  with_indexed_items: "{{ role_subnets.results }}"
+  when: "{{ item.0 }} == 0"

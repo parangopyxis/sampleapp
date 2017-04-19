@@ -1,0 +1,16 @@
+ec2_assign_public_ip: no
+ec2_aws_access_key: XXXXXXXXXXXXXXXXXXXX
+ec2_aws_secret_key: YYYYYYYYYYYYYYYYYYYY
+ec2_count_tag:
+  Name: instanceName
+ec2_ebs_optimized: no
+ec2_exact_count: 1
+ec2_group: sec_group_name
+ec2_image: ami-a97013c5
+ec2_instance_type: t2.micro
+ec2_key_name: my_key_pair_name
+ec2_vpc_subnet_id: subnet-idxxxxxxx
+ec2_wait: yes
+ec2_wait_timeout: 1200
+ec2_instance_tags:
+  Name: instanceName
