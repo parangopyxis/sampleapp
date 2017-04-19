@@ -6,8 +6,6 @@
   vars_files:
     - vars/vars_infrastructure.yml
   tasks:
-    - name: Reset {{ env }}_inventory hosts file
-      command: "echo '[workshop_servers]' > hosts/{{ env }}_inventory"
     - include_role:
         name: aws-networking
     - include_vars: vars/vpc_role_vars
