@@ -5,6 +5,7 @@
   gather_facts: no
   vars_files:
     - vars/vars_infrastructure.yml
+    - group_vars/all/config.yml
   tasks:
     - include_role:
         name: aws-networking
