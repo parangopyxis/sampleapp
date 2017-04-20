@@ -8,5 +8,8 @@
     state: "{{ item.ec2_state }}"
     validate_certs: "{{ item.ec2_validate_certs }}"
     vpc_id: "{{ item.ec2_vpc_id }}"
+    rules_egress:
+      - proto: all
+        cidr_ip: 0.0.0.0/0
   with_items:
     - "{{ ec2_security_groups }}"
