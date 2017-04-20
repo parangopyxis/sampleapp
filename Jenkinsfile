@@ -39,7 +39,7 @@ pipeline {
     stage('[Ansible] Provision Platform') {
       steps {
         dir(path: './infrastructure/ansible/playbooks/') {
-          ansiblePlaybook(playbook: 'provision_server.yml', colorized: true, installation: 'ansible-latest', inventory: 'hosts/qa_inventory')
+          ansiblePlaybook(playbook: 'provision_server.yml', colorized: true, installation: 'ansible-latest', inventory: 'hosts/qa_inventory', credentialsId: 'vp_workshop_key')
         }
         
       }
