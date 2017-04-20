@@ -2,7 +2,7 @@
   ec2_group:
     name: "{{ item.ec2_sg_name }}"
     description: "{{ item.ec2_description }}"
-    rules: "{{ item.ec2_sg_ingress_rules | to_nice_json }}"
-    rules_egress: "{{ item.ec2_sg_egress_rules | to_nice_json }}"
+    rules: "{{ item.ec2_sg_ingress_rules | from_json }}"
+    rules_egress: "{{ item.ec2_sg_egress_rules | from_json }}"
   with_items:
     - "{{ ec2_security_groups_rules }}"
