@@ -41,7 +41,7 @@ ec2_count_tag:
 ec2_ebs_optimized: no
 ec2_exact_count: 1
 ec2_group: vp_workshop_sg_{{ env }}
-ec2_image: ami-a97013c5
+ec2_image: ami-8df695e1
 ec2_instance_type: t2.micro
 ec2_key_name: vp_workshop_key
 ec2_vpc_subnet_id: "{{ subnet_0_id }}"
