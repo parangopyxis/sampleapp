@@ -28,7 +28,7 @@ ec2_security_groups_rules:
         to_port: 22
         cidr_ip: 0.0.0.0/0
     ec2_sg_egress_rules:
-      - proto: -1
+      - proto: 'all'
         cidr_ip: 0.0.0.0/0
 ######################### ec2-instances role vars #######################
 ec2_assign_public_ip: yes
