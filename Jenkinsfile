@@ -31,7 +31,7 @@ pipeline {
     stage('[Ansible] Provision Infrastructure') {
       steps {
         dir(path: './infrastructure/ansible/playbooks') {
-          ansiblePlaybook(playbook: 'provision_infrastructure.yml', extras: '-e env=qa -vvv', installation: 'ansible-latest')
+          ansiblePlaybook(playbook: 'provision_infrastructure.yml', extras: '-e env=qa', installation: 'ansible-latest')
         }
         
       }
@@ -39,7 +39,7 @@ pipeline {
     stage('[Ansible] Provision Platform') {
       steps {
         dir(path: './infrastructure/ansible/playbooks/') {
-          ansiblePlaybook(playbook: 'provision_server.yml', colorized: true, installation: 'ansible-latest', inventory: 'hosts/qa_inventory', credentialsId: 'vp_workshop_key')
+          ansiblePlaybook(playbook: 'provision_server.yml', colorized: true, installation: 'ansible-latest', inventory: 'hosts/qa_inventory', credentialsId: 'vp_workshop_key', extras: '-vvv')
         }
         
       }
