@@ -23,20 +23,20 @@
         path: /code
         state: directory
 
-    - name: Add Jar file
-      copy:
-        src: jars/sparkexample-jar-with-dependencies.jar
-        dest: /code/sparkexample-jar-with-dependencies.jar
+#    - name: Add Jar file
+#      copy:
+#        src: jars/sparkexample-jar-with-dependencies.jar
+#        dest: /code/sparkexample-jar-with-dependencies.jar
 
-    - block:
-
-        - name: Starting process java -jar /code/sparkexample-jar-with-dependencies.jar
-          shell: java -jar /code/sparkexample-jar-with-dependencies.jar &
-
-      rescue:
-
-        - name: Kill running process java -jar /code/sparkexample-jar-with-dependencies.jar
-          shell: kill -9 $(ps -fea --no-headers | grep sparkexample-jar-with-dependencies.jar | awk '{ print $2 }')
-
-        - name: "[RETRY] Starting process java -jar /code/sparkexample-jar-with-dependencies.jar"
-          shell: java -jar /code/sparkexample-jar-with-dependencies.jar &
+#    - block:
+#
+#        - name: Starting process java -jar /code/sparkexample-jar-with-dependencies.jar
+#          shell: java -jar /code/sparkexample-jar-with-dependencies.jar &
+#
+#      rescue:
+#
+#        - name: Kill running process java -jar /code/sparkexample-jar-with-dependencies.jar
+#          shell: kill -9 $(ps -fea --no-headers | grep sparkexample-jar-with-dependencies.jar | awk '{ print $2 }')
+#
+#        - name: "[RETRY] Starting process java -jar /code/sparkexample-jar-with-dependencies.jar"
+#          shell: java -jar /code/sparkexample-jar-with-dependencies.jar &
