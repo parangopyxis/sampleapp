@@ -31,7 +31,7 @@ pipeline {
     stage('[Ansible] Provision Infrastructure') {
       steps {
         dir(path: './infrastructure/ansible/playbooks') {
-          ansiblePlaybook(playbook: 'provision_infrastructure.yml', extras: '-e env=qa -vvv')
+          ansiblePlaybook(playbook: 'provision_infrastructure.yml', extras: '-e env=qa -vvv', installation: 'ansible-latest')
         }
         
       }
