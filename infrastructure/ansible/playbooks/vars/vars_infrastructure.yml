@@ -48,3 +48,4 @@ ec2_key_name: vp_workshop_key
 ec2_vpc_subnet_id: "{{ subnet_0_id }}"
 ec2_wait: yes
 ec2_wait_timeout: 1200
+ec2_region: "{{ aws_region}}"

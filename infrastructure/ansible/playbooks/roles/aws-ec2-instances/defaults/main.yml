@@ -14,3 +14,4 @@ ec2_wait: yes
 ec2_wait_timeout: 1200
 ec2_instance_tags:
   Name: instanceName
+ec2_region: us-east-1
